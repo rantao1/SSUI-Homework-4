@@ -1,0 +1,23 @@
+{
+  "name": "bun-bun-bake-shop",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "AsyncStorage": "^0.1.5",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "homepage": "https://rantao1.github.io/SSUI-Homework-4/",
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
+  }
+}
