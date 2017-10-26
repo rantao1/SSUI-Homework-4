@@ -191,6 +191,7 @@ button:focus {
   font-style: italic;
   letter-spacing: .03em;
   color: #ccc;
+  user-select: none;
 }
 
 .Total {
@@ -652,7 +653,7 @@ button:focus {
 
 .Wrapper .Alert,
 .Cart .Alert {
-  margin-top: 7%;
+  margin-top: 8%;
 }
 
 .Feature-intro {

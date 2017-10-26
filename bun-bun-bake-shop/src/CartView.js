@@ -2,6 +2,14 @@ import React, {  Component } from 'react';
 import './App.css';
 
 class CartView extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			tada: false
+		};
+
+		setInterval(() => {this.setState({tada: false})}, 2000)
+	}
 
 	render() {
 		return(
@@ -16,13 +24,19 @@ class CartView extends Component {
 	                </td>
 
 					<td className="Item-quantity">
-						<button className="Plus-btn" type="button" name="button" onClick={this.props.addQty}>
-							<i className="fa fa-plus" aria-hidden="true"></i>
-						</button>
-						<input readOnly type="text" className="Input_qty" value={this.props.productQty} />
-						<button className="Minus-btn" type="button" name="button" onClick={this.props.dropQty}>
-			                <i className="fa fa-minus" aria-hidden="true"></i>
-			            </button>
+						<div onClick={(ev) => this.setState({tada: true})}>
+							<button className="Plus-btn" type="button" name="button" onClick={this.props.addQty}>
+								<i className="fa fa-plus" aria-hidden="true"></i>
+							</button>
+						</div>
+						<div className={"" + (this.state.tada === true ? "animated tada" : "")}>
+							<input readOnly type="text" className="Input_qty" value={this.props.productQty} />
+						</div>
+						<div onClick={(ev) => this.setState({tada: true})}>
+							<button className="Minus-btn" type="button" name="button" onClick={this.props.dropQty}>
+				                <i className="fa fa-minus" aria-hidden="true"></i>
+				            </button>
+			            </div>
 					</td>
 
 					<td className="Product-subtotal">

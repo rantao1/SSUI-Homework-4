@@ -71,11 +71,13 @@ class Shop extends Component {
 
 		return (
 			<div className="Wrapper" onClick={this.props.onClick}>
+				<div>
+          			<Fade in={!!this.state.show} />
+        		</div>
+        		
 				<section className="Product-list">
+
 					<div className="Intro-text">
-						<div>
-          					<Fade in={!!this.state.show} />
-        				</div>
 
 						<h3 className="Ship-text">We are in Pittsburgh PA but...<br /> we ship our award-winning fresh rolls to anywhere in the USA!</h3>
 					</div>
