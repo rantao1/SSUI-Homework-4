@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import FeaturedItem from './FeaturedItem.js';
 import ItemDetail from './ItemDetail.js';
+import { CSSTransition, Transition } from 'react-transition-group';
 
 import Cinnamon from './Cinnamon.json';
 
@@ -13,14 +14,20 @@ class Home extends Component {
 		this.state = {
 			featured: products,
 			detail: null,
+			show: false,
 		}
+		setInterval(() => {this.setState({show: false})}, 4000)
 	}
 
 	selectItem(id) {
 		console.log("selected", id);
 		var item = this.state.featured[id]
-		var detailView = <ItemDetail onClose = {(ev) => this.setState({detail:null})} productId = {item.productId} productImg = {item.productImg} productName = {item.productName} productPrice = {item.productPrice} productDetail1 = {item.productDetail1} productDetail2 = {item.productDetail2} ingredientImg = {item.ingredientImg}/>
+		var detailView = <ItemDetail onClose = {(ev) => this.setState({detail:null})} showAlert = {this.showAlert.bind(this)} productId = {item.productId} productImg = {item.productImg} productName = {item.productName} productPrice = {item.productPrice} productDetail1 = {item.productDetail1} productDetail2 = {item.productDetail2} ingredientImg = {item.ingredientImg}/>
 		this.setState({detail: detailView})
+	}
+
+	showAlert() {
+		this.setState({show: true})
 	}
 
 	renderDetailView() {
@@ -48,8 +55,37 @@ class Home extends Component {
 			elements.push(<FeaturedItem onClick = {this.selectItem.bind(this, i)} productId = {item.productId} productImg = {item.productImg} productName = {item.productName} productPrice = {item.productPrice} productDetail1 = {item.productDetail1} key = {item.productId} />)
 		}
 
+		const defaultStyle = {
+			transition: 'opacity 3000ms ease-in-out',
+			opacity: 0
+		}
+		const transitionStyles = {
+			entering: { opacity: 0 },
+			entered: { opacity: 1 },
+			exiting: { opacity: 1 },
+			exited: { opacity: 0 }
+		};
+
+		const Fade = ({ in: inProp }) => (
+  			<Transition in={inProp} timeout={3000}>
+			    {(state) => (
+			      <div style={{
+			        ...defaultStyle,
+			        ...transitionStyles[state]
+			      }} className="Alert">
+			        <p>Item added to cart successfully!</p>
+			      </div>
+			    )}
+		  	</Transition>
+		);
+
 		return (
 			<div className="Wrapper" onClick={this.props.onClick}>
+
+				<div>
+          			<Fade in={!!this.state.show} />
+        		</div>
+
 				<section className="Feature-intro">
 					<div className="Image-container">
 						<img className="Bg-img" src="https://image.ibb.co/maQvY6/0_home_top_img.jpg" alt="" />

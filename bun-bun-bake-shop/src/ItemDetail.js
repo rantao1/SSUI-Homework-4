@@ -8,7 +8,9 @@ class ItemDetail extends Component {
 		super(props);
 		this.state = {
 			value: 1,
+			tada: false
 		};
+		setInterval(() => {this.setState({tada: false})}, 2000)
 	}
 
 	handleChange(e) {
@@ -89,20 +91,28 @@ class ItemDetail extends Component {
 						<div className="Add-product" >
 							<p>Price: $<span id="current-price">{this.props.productPrice * this.state.value}</span></p>
 							<div onClick={this.addToCart.bind(this)}>
-								<a className="Addcart-btn" onClick={this.props.onClose}>add to cart</a>
+								<div onClick={this.props.showAlert}>
+									<a className="Addcart-btn" onClick={this.props.onClose}>add to cart</a>
+								</div>
 							</div>
 						</div>
 
 						<div className="Quantity">
 							<div className="Quantity-wrapper">
 								<p>Qty.</p>
-								<button className="Plus-btn" type="button" name="button" onClick={this.handleAdd.bind(this)}>
-		                        	<i className="fa fa-plus" aria-hidden="true"></i>
-		                        </button>
-		                        <input readOnly type="text" className="Input_qty" value={this.state.value} onChange={(e) => {this.handleChange(e)}} />
-		                        <button className="Minus-btn" type="button" name="button" onClick={this.handleDrop.bind(this)}>
-		                        	<i className="fa fa-minus" aria-hidden="true"></i>
-		                        </button>
+								<div onClick={(ev) => this.setState({tada: true})}>
+									<button className="Plus-btn" type="button" name="button" onClick={this.handleAdd.bind(this)}>
+			                        	<i className="fa fa-plus" aria-hidden="true"></i>
+			                        </button>
+			                    </div>
+			                    <div className={"" + (this.state.tada === true ? "animated tada" : "")}>
+		                        	<input readOnly type="text" className="Input_qty" value={this.state.value} onChange={(e) => {this.handleChange(e)}} />
+		                        </div>
+		                        <div onClick={(ev) => this.setState({tada: true})}>
+			                        <button className="Minus-btn" type="button" name="button" onClick={this.handleDrop.bind(this)}>
+			                        	<i className="fa fa-minus" aria-hidden="true"></i>
+			                        </button>
+			                    </div>
 		                    </div>
 						</div>
 					</div>

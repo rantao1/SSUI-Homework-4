@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Great+Vibes|Lato:300,400,900');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css');
 
 .App {
   font-family: 'Lato', sans-serif;
@@ -91,6 +92,10 @@ button:focus {
   margin: auto;
 }
 
+.Cartcounter div {
+  float: right;
+}
+
 .Text-link {
   display: block;
   width: 50%;
@@ -163,13 +168,13 @@ button:focus {
   right: 5%;
   top: 8%;
   background: #fff;
-  border-radius: 3%;
+  border-radius: .5em;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   z-index: 66;
 }
 
 .Show {
-  display: block;
+  display: block !important;
 }
 
 .Previewwrapper {
@@ -645,6 +650,11 @@ button:focus {
 .Wrapper {
 }
 
+.Wrapper .Alert,
+.Cart .Alert {
+  margin-top: 7%;
+}
+
 .Feature-intro {
   margin-bottom: 2em;
   height: 100vh;
@@ -724,11 +734,28 @@ button:focus {
 
 /*--------- Shop styles ---------*/
 .Product-list {
-  padding: 5% 0 0 0;
+  padding: 7% 0 0 0;
 }
 
 .Product-list .Intro-text {
   margin-bottom: 3em;
+}
+
+.Alert {
+  position: fixed;
+  background-color: rgba(88, 165, 91, 0.7);
+  color: #fff;
+  left: 35%;
+  border-radius: .5em;
+  width: 30%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.Alert p {
+  font-size: 1em;
+  font-weight: 300;
+  text-align: center
 }
 
 .Ship-text {

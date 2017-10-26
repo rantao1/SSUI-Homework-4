@@ -21,8 +21,11 @@ class App extends Component {
             counter: 0,
             CartProducts: [],
             Subtotal: 0,
-            isMouseInside: false
+            isMouseInside: false,
+            animate: false
         };
+
+        setInterval(() => {this.setState({animate: false})}, 2000)
     }
     
     navToHomePage() {
@@ -104,6 +107,7 @@ class App extends Component {
         removedItem.productQty = 0
         AsyncStorage.setItem(removedItem.productId, JSON.stringify(removedItem), () => {
             this.refreshCounter();
+            this.setState({animate:true})
         })
     }
 
@@ -124,19 +128,20 @@ class App extends Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.refreshCounter();
     }
 
     render() {
         return (
             <div className="App">
-                <header className="Header">
+                <header className={"Header" + (this.state.show === true? " Addbackground" : "")}>
                     <div className="Row">
                         <div className="Navbar">
                             <div className={"Menu-logo" + (this.state.page === 0 ? " Active" : "")} onClick={this.navToHomePage.bind(this)}><img alt="shop logo" className="Logo" src="https://image.ibb.co/goJ4RR/0_logo.png" />
                             </div>
                             
-                            <div className={"Menu-item" + (this.state.page === 2 ? " Active" : "")} onClick={(ev) => this.setState({page:2})}><p className="Text-link" onMouseEnter={(ev) => this.setState({isMouseInside: true})} onMouseLeave={(ev) => this.setState({isMouseInside: false})}>Cart<CartQty Qty={this.state.counter} /></p>
+                            <div className={"Menu-item" + " Cartcounter" + (this.state.page === 2 ? " Active" : "")} onClick={(ev) => this.setState({page:2})}><p className="Text-link" onMouseEnter={(ev) => this.setState({isMouseInside: true})} onMouseLeave={(ev) => this.setState({isMouseInside: false})}>Cart<div className={"" + (this.state.animate === true ? "animated tada" : "")}><CartQty Qty={this.state.counter} /></div></p>
                             </div>
 
                             <div className={"Menu-item" + (this.state.page === 1 ? " Active" : "")} onClick={(ev) => this.setState({page:1})}><p className="Text-link">Shop</p>

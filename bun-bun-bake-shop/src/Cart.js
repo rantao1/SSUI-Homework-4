@@ -4,6 +4,7 @@ import './App.css';
 import AsyncStorage from './AsyncStorage.js';
 import CartItem from './CartItem.js';
 import Recommendations from './Recommendations.js';
+import { CSSTransition, Transition } from 'react-transition-group';
 
 import Cinnamonroll from './Cinnamon.json';
 
@@ -17,12 +18,18 @@ class Cart extends Component {
 			Summary: 0,
 			Subtotal: 0,
 			Shipping: 3,
+			show: false
 		};
+		setInterval(() => {this.setState({show: false})}, 4000)
 	}
 
 	componentWillReceiveProps(nextProps) {
 		this.updateCartElements();
 		this.updateSummary();
+	}
+
+	showAlert() {
+		this.setState({show: true})
 	}
 
 	handleChange(e) {
@@ -158,7 +165,7 @@ class Cart extends Component {
 				}
 		});
 
-		window.scrollTo(0, 0);
+		this.showAlert();
 
 	}
 
@@ -280,12 +287,37 @@ class Cart extends Component {
 	}
 
 	render() {
+		const defaultStyle = {
+			transition: 'opacity 3000ms ease-in-out',
+			opacity: 0
+		}
+		const transitionStyles = {
+			entering: { opacity: 0 },
+			entered: { opacity: 1 },
+			exiting: { opacity: 1 },
+			exited: { opacity: 0 }
+		};
+
+		const Fade = ({ in: inProp }) => (
+  			<Transition in={inProp} timeout={3000}>
+			    {(state) => (
+			      <div style={{
+			        ...defaultStyle,
+			        ...transitionStyles[state]
+			      }} className="Alert">
+			        <p>Item added to cart successfully!</p>
+			      </div>
+			    )}
+		  	</Transition>
+		);
+
 		return (
 			<div onClick={this.props.onClick}>
-
-					<div className="Cart">
-							{this.renderCartSummary()}
-					</div>
+				
+				<div className="Cart">
+					<Fade in={!!this.state.show} />
+					{this.renderCartSummary()}
+				</div>
 
 			</div>
 		);
