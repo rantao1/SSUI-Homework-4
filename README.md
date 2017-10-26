@@ -1,4 +1,4 @@
-# SSUI-Homework-4 - React JS based web app for Bun Bun Bake Shop
+## SSUI-Homework-4 - React JS based shopping website
 ### Features:
  - Interactive cart hover preview on every page
  - Dynamic-loaded data from JSON file
